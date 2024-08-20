@@ -1,0 +1,25 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+
+<div class="row g-4">
+  <div class="col-lg-4 col-12">
+    <h4 class="fw-normal">{{ self.heading }}</h4>
+  </div>
+  <div class="col-lg-6 col-12">
+    <div class="d-flex flex-column" style="gap: 20px;">
+      {% for info in self.information %}
+      <div class="row">
+        <div class="col-md-3 col-12">
+          <p class="primary-font-color">{{ info.timeline }}</p>
+        </div>
+        <div class="col-md-9 col-12">
+          <p class="fw-medium">{{ info.heading_info }}</p>
+          {% for sub in info.sub_info %}
+          <p>{{ sub.info }}</p>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==5.0"
+wagtail = "==6.2"
+django-environ = "*"
+whitenoise = "*"
+gunicorn = "*"
+psycopg2-binary = "*"
+fontawesomefree = "*"
+wagtail-django-recaptcha = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"

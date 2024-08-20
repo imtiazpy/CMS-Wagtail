@@ -1,0 +1,249 @@
+{% load static menu_tags obfuscation wagtailcore_tags wagtailimages_tags %}
+
+{% get_menu 'footer' as navigation %}
+{% get_menu 'bottom' as bottom_nav %}
+
+
+{% image settings.site_settings.CompanySettings.footer_bg fill-1200x200 as footer_img %}
+
+<footer class="text-white mt-auto mb-0">
+  <div class="footer-bg" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.35), rgba(0,0,0,0.45)), url('{{ footer_img.url }}');
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;">
+    <div class="footer-content">
+      <div class="container py-5">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+          <div class="col mb-4">
+            <a href="/">
+              {% if settings.site_settings.CompanySettings.footer_logo %}
+              {% image settings.site_settings.CompanySettings.footer_logo fill-250x50 as logo %}
+              
+              <img class="img-fluid" src="{{ logo.url }}" width="250" height="50" alt="{{ logo.url }}">
+              
+              {% else %}
+
+              <svg class="img-fluid" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="220"
+                height="50" viewBox="0 0 606.395 148.065">
+                <defs>
+                  <clipPath id="a">
+                    <rect width="606.395" height="148.065" fill="none" />
+                  </clipPath>
+                </defs>
+                <g clip-path="url(#a)"><text transform="translate(0 104.566)" fill="#fff" font-size="116.935"
+                    font-family="Cinzel-SemiBold, Cinzel" font-weight="600">
+                    <tspan x="0" y="0">S</tspan>
+                  </text><text transform="translate(89.456 104.566)" fill="#fff" font-size="116.935"
+                    font-family="Cinzel-SemiBold, Cinzel" font-weight="600">
+                    <tspan x="0" y="0">S</tspan>
+                  </text></g><text transform="translate(184.224 59.411)" fill="#fff" font-size="51.16"
+                  font-family="Cinzel-SemiBold, Cinzel" font-weight="600">
+                  <tspan x="0" y="0">S</tspan>
+                  <tspan y="0" letter-spacing="-0.022em">t</tspan>
+                  <tspan y="0" letter-spacing="-0.013em">o</tspan>
+                  <tspan y="0" letter-spacing="-0.012em">i</tspan>
+                  <tspan y="0">c </tspan>
+                  <tspan y="0" letter-spacing="-0.002em">I</tspan>
+                  <tspan y="0">n</tspan>
+                  <tspan y="0" letter-spacing="-0.004em">s</tspan>
+                  <tspan y="0" letter-spacing="0.003em">t</tspan>
+                  <tspan y="0">i</tspan>
+                  <tspan y="0" letter-spacing="0.001em">t</tspan>
+                  <tspan y="0" letter-spacing="0.002em">u</tspan>
+                  <tspan y="0">t</tspan>
+                </text><text transform="translate(568.891 59.411)" fill="#fff" font-size="21.64"
+                  font-family="Cinzel-SemiBold, Cinzel" font-weight="600">
+                  <tspan x="0" y="0" letter-spacing="-0.014em">o</tspan>
+                  <tspan y="0">f </tspan>
+                </text><text transform="translate(184.224 106.298)" fill="#fff" font-size="51.16"
+                  font-family="Cinzel-SemiBold, Cinzel" font-weight="600">
+                  <tspan x="0" y="0" letter-spacing="-0.004em">S</tspan>
+                  <tspan y="0">wit</tspan>
+                  <tspan y="0" letter-spacing="0.004em">z</tspan>
+                  <tspan y="0" letter-spacing="-0.008em">e</tspan>
+                  <tspan y="0">r</tspan>
+                  <tspan y="0" letter-spacing="0.006em">l</tspan>
+                  <tspan y="0">and</tspan>
+                </text><text transform="translate(534.665 106.298)" fill="#fff" font-size="38.472"
+                  font-family="Cinzel-SemiBold, Cinzel" font-weight="600">
+                  <tspan x="0" y="0"> </tspan>
+                </text><text transform="translate(544.283 106.298)" fill="#fff" font-size="21.64"
+                  font-family="Cinzel-SemiBold, Cinzel" font-weight="600">
+                  <tspan x="0" y="0">E.</tspan>
+                  <tspan y="0" letter-spacing="-0.127em">V</tspan>
+                  <tspan y="0">.</tspan>
+                </text>
+                <g clip-path="url(#a)">
+                  <path
+                    d="M96.442,128.782H53.418v-6.591H96.442Zm-41.524-1.5H94.942v-3.591H54.918Zm34.1-8.683H62.063v-6.591H89.019Zm-25.456-1.5H87.519v-3.591H63.563Zm20.365-8.682H77.337V20.365h6.591Zm-5.091-1.5h3.591V21.865H78.837Zm-5.092,1.5H67.154V20.365h6.591Zm-5.091-1.5h3.591V21.865H68.654ZM86.566,16.774H64.514l-.111-.618a13.824,13.824,0,0,0-1.842-4.831l-.7-1.143H89.224l-.7,1.143a13.826,13.826,0,0,0-1.844,4.831Zm-20.809-1.5H85.323A15.284,15.284,0,0,1,86.6,11.682H64.478A15.29,15.29,0,0,1,65.757,15.274ZM94.111,6.591H56.972V0H94.111Zm-35.639-1.5H92.611V1.5H58.472Z"
+                    fill="#fff" />
+                  <path d="M1,86.591H-1V0H1Z" transform="translate(165.518 21.075)" fill="#fff" />
+                </g>
+              </svg>
+              {% endif %}
+            </a>
+          </div>
+          <div class="col">
+            {% if settings.site_settings.CompanySettings.address %}
+            <div class="mb-4">
+              <p>{{ settings.site_settings.CompanySettings.address|richtext }}</p>
+            </div>
+            {% endif %}
+            <div class="mb-4">
+              {% if settings.site_settings.CompanySettings.phone %}
+              <div class="d-flex align-items-center" style="gap: 4px;">
+                <i class="fa-solid fa-phone primary-font-color"></i>
+                
+                <a class="text-white" href="tel: {{ settings.site_settings.CompanySettings.phone|obfuscate }}">
+                  {{ settings.site_settings.CompanySettings.phone|obfuscate }}
+                </a>
+                
+              </div>
+              {% endif %}
+              {% if settings.site_settings.CompanySettings.email %}
+              <div class="d-flex align-items-center" style="gap: 4px;">
+                <i class="fa-solid fa-envelope primary-font-color"></i>
+                <p class="text-white">
+                  {{ settings.site_settings.CompanySettings.email|obfuscate_mailto }}
+                </p>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col">
+            <ul class="row row-cols-3 my-2" style="gap: 6px;">
+              {% for item in navigation %}
+              <li class="col me-4 mx-md-2">
+                <a class="text-white" {% if item.open_in_new_tab %} target="_blank" {% endif %} href="{{ item.link }}">
+                  {{ item.title }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="col">
+            <div class="d-flex flex-column mt-2" style="gap: 14px;">
+              <div class="wrapper ">
+                <form class="searchBar" method="GET" action="{% url 'search' %}">
+                  <input id="searchQueryInput" type="text" name="query" placeholder="Search" value="" />
+                  <button class="primary-bg-color" id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <path fill="#fff"
+                        d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                    </svg>
+                  </button>
+                </form>
+              </div>
+              <div class="socials d-flex mt-2" style="gap: 20px;">
+                {% if settings.site_settings.SocialMediaSettings.social_media_links.all %}
+                {% for item in settings.site_settings.SocialMediaSettings.social_media_links.all %}
+                <a class="icon rounded-circle" target="_blank" href="{{ item.link|obfuscate }}">
+                  {% if item.name == 'facebook' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="51" height="52" viewBox="0 0 51 52">
+                    <g id="Group_710" data-name="Group 710" transform="translate(-1163 -4138)">
+                      <g id="Ellipse_10" data-name="Ellipse 10" transform="translate(1163 4138)" fill="#0d5baf"
+                        stroke="#fff" stroke-width="2">
+                        <ellipse cx="25.5" cy="26" rx="25.5" ry="26" stroke="none" />
+                        <ellipse cx="25.5" cy="26" rx="24.5" ry="25" fill="none" />
+                      </g>
+                      <g id="facebook-logo" transform="translate(1181.61 4151.423)">
+                        <path id="Path_772" data-name="Path 772"
+                          d="M34.964.005,31.752,0c-3.609,0-5.941,2.393-5.941,6.1V8.906H22.582a.505.505,0,0,0-.505.505v4.072a.505.505,0,0,0,.505.505h3.229V24.264a.5.5,0,0,0,.505.505H30.53a.505.505,0,0,0,.505-.505V13.989h3.776a.5.5,0,0,0,.505-.505l0-4.072a.505.505,0,0,0-.505-.505H31.035V6.524c0-1.145.273-1.726,1.765-1.726h2.164a.5.5,0,0,0,.5-.505V.51A.505.505,0,0,0,34.964.005Z"
+                          transform="translate(-22.077)" fill="#fff" />
+                      </g>
+                    </g>
+                  </svg>
+                  {% elif item.name == 'linkedin' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="51" height="52" viewBox="0 0 51 52">
+                    <g id="Group_686" data-name="Group 686" transform="translate(-1170 -4390)">
+                      <g id="Ellipse_32" data-name="Ellipse 32" transform="translate(1170 4390)" fill="#0d5baf"
+                        stroke="#fff" stroke-width="2">
+                        <ellipse cx="25.5" cy="26" rx="25.5" ry="26" stroke="none" />
+                        <ellipse cx="25.5" cy="26" rx="24.5" ry="25" fill="none" />
+                      </g>
+                      <g id="Group_679" data-name="Group 679" transform="translate(1170.305 4390.942)">
+                        <g id="linkedin-logo" transform="translate(15.695 13.886)">
+                          <path id="LinkedIn"
+                            d="M21.606,22.216V30.2H16.975V22.751c0-1.872-.67-3.15-2.346-3.15A2.534,2.534,0,0,0,12.253,21.3a3.169,3.169,0,0,0-.154,1.129V30.2H7.467s.062-12.623,0-13.931H12.1v1.975c-.009.015-.022.031-.03.045h.03v-.045a4.6,4.6,0,0,1,4.174-2.3C19.321,15.946,21.606,17.937,21.606,22.216ZM2.621,9.558a2.414,2.414,0,1,0-.061,4.815h.031a2.415,2.415,0,1,0,.031-4.815ZM.275,30.2H4.906V16.273H.275Z"
+                            transform="translate(0 -9.558)" fill="#fff" />
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
+                  {% elif item.name == 'x' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="51" height="52" viewBox="0 0 51 52">
+                    <g id="Group_685" data-name="Group 685" transform="translate(-1111 -4390)">
+                      <g id="Ellipse_31" data-name="Ellipse 31" transform="translate(1111 4390)" fill="#0d5baf"
+                        stroke="#fff" stroke-width="2">
+                        <ellipse cx="25.5" cy="26" rx="25.5" ry="26" stroke="none" />
+                        <ellipse cx="25.5" cy="26" rx="24.5" ry="25" fill="none" />
+                      </g>
+                      <g id="Group_682" data-name="Group 682" transform="translate(1111.6 4391.766)">
+                        <path id="twitter"
+                          d="M26.664,9.8,35.1,0h-2L25.777,8.51,19.929,0H13.185l8.842,12.869L13.185,23.146h2l7.731-8.987,6.175,8.987h6.744L26.664,9.8Z"
+                          transform="translate(0.164 13.062)" fill="#fff" />
+                      </g>
+                    </g>
+                  </svg>
+                  {% elif item.name == 'twitter' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="51" height="52" viewBox="0 0 51 52">
+                    <g id="Group_685" data-name="Group 685" transform="translate(-1111 -4390)">
+                      <g id="Ellipse_31" data-name="Ellipse 31" transform="translate(1111 4390)" fill="#0d5baf"
+                        stroke="#fff" stroke-width="2">
+                        <ellipse cx="25.5" cy="26" rx="25.5" ry="26" stroke="none" />
+                        <ellipse cx="25.5" cy="26" rx="24.5" ry="25" fill="none" />
+                      </g>
+                      <g id="Group_682" data-name="Group 682" transform="translate(1111.6 4391.766)">
+                        <path id="twitter"
+                          d="M26.664,9.8,35.1,0h-2L25.777,8.51,19.929,0H13.185l8.842,12.869L13.185,23.146h2l7.731-8.987,6.175,8.987h6.744L26.664,9.8Z"
+                          transform="translate(0.164 13.062)" fill="#fff" />
+                      </g>
+                    </g>
+                  </svg>
+                  {% elif item.name == 'instagram' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="51" height="52" viewBox="0 0 51 52">
+                    <g id="Group_733" data-name="Group 733" transform="translate(-1170 -4390)">
+                      <g id="Ellipse_32" data-name="Ellipse 32" transform="translate(1170 4390)" fill="#0d5baf" stroke="#fff" stroke-width="2">
+                        <ellipse cx="25.5" cy="26" rx="25.5" ry="26" stroke="none"/>
+                        <ellipse cx="25.5" cy="26" rx="24.5" ry="25" fill="none"/>
+                      </g>
+                      <g id="instagram" transform="translate(1184.984 4405.483)">
+                        <path id="Path_776" data-name="Path 776" d="M17.952,0H3.081A3.085,3.085,0,0,0,0,3.081V17.952a3.085,3.085,0,0,0,3.081,3.081H17.952a3.085,3.085,0,0,0,3.081-3.081V3.081A3.085,3.085,0,0,0,17.952,0ZM10.557,16.021A5.546,5.546,0,1,1,16.1,10.475,5.552,5.552,0,0,1,10.557,16.021Zm6.162-9.859a1.849,1.849,0,1,1,1.849-1.849A1.851,1.851,0,0,1,16.719,6.162Zm0,0" fill="#fff"/>
+                      </g>
+                    </g>
+                  </svg>
+                  {% endif %}
+                </a>
+                {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container py-2">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+        {% if settings.site_settings.CompanySettings.copyright %}
+        <p class="text-dark">{{ settings.site_settings.CompanySettings.copyright }}</p>
+        {% endif %}
+        <ul class="ms-4 d-flex flex-wrap justify-content-center" style="gap: 6px;">
+          {% for bottom_item in bottom_nav %}
+          <li class="me-4 mx-md-2">
+            <a class="text-dark" href="{{ bottom_item.link }}">
+              {{ bottom_item.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% if settings.site_settings.CompanySettings.site_by %}
+      <a class="text-dark" target="_blank" href="{{ settings.site_settings.CompanySettings.site_by_url }}">
+        Site by {{ settings.site_settings.CompanySettings.site_by }}
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</footer>

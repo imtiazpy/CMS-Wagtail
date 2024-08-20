@@ -1,0 +1,24 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<div class="{% if self.block_width == 'fluid' %} container-fluid {% else %} container {% endif %}">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 justify-content-center">
+    {% for item in self.body %}
+    {% image item.image max-1920x1080 as img %}
+    <div class="col slide-wrapper" data-open="{{ item.url.open_in_new }}" data-page="{{ item.url.src }}" onclick="redirectToPage(this)">
+      <div class="slide-card">
+        <div class="preview" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0.65) 90%, rgba(0, 0, 0, 0.75) 100%), url('{{ img.url }}');
+            background-position: center;
+            background-size: cover;">
+          <div class="sliding-content d-flex flex-column align-items-start">
+            <div class="img-info">
+              <h4 class="mb-2">{{ item.title }}</h4>
+              <p>{{ item.content | truncatechars:200 }}</p>
+            </div>
+          </div>
+          <h4 class="slide-up">{{ item.title }}</h4>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

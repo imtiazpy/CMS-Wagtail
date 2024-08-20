@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="51" height="52" viewBox="0 0 51 52">
+  <g id="Group_733" data-name="Group 733" transform="translate(-1170 -4390)">
+    <g id="Ellipse_32" data-name="Ellipse 32" transform="translate(1170 4390)" fill="#0d5baf" stroke="#fff" stroke-width="2">
+      <ellipse cx="25.5" cy="26" rx="25.5" ry="26" stroke="none"/>
+      <ellipse cx="25.5" cy="26" rx="24.5" ry="25" fill="none"/>
+    </g>
+    <g id="instagram" transform="translate(1184.984 4405.483)">
+      <path id="Path_776" data-name="Path 776" d="M17.952,0H3.081A3.085,3.085,0,0,0,0,3.081V17.952a3.085,3.085,0,0,0,3.081,3.081H17.952a3.085,3.085,0,0,0,3.081-3.081V3.081A3.085,3.085,0,0,0,17.952,0ZM10.557,16.021A5.546,5.546,0,1,1,16.1,10.475,5.552,5.552,0,0,1,10.557,16.021Zm6.162-9.859a1.849,1.849,0,1,1,1.849-1.849A1.851,1.851,0,0,1,16.719,6.162Zm0,0" fill="#fff"/>
+    </g>
+  </g>
+</svg>

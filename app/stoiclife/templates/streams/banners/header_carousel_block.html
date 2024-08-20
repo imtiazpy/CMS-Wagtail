@@ -1,0 +1,51 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<section class="carousel-section">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="10000">
+    <div class="carousel-indicators">
+      {% for carousel in self.carousel_items %}
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{  forloop.counter0 }}"
+        class="{% if 0 == forloop.counter0 %} active {% endif %}" aria-current="true"
+        aria-label="Slide {{ forloop.counter }}"></button>
+      {% endfor %}
+    </div>
+    <div class="carousel-inner d-block">
+      {% for carousel in self.carousel_items %}
+      <div class="carousel-item {% if 0 == forloop.counter0 %} active {% endif %}">
+        {% if carousel.block_type == 'image' %}
+        {% image carousel.value.image max-1920x1080 as img %}
+        <img src="{{ img.url }}" class="d-block w-100 h-100 img-fluid" alt="{{ img.alt }}">
+        {% elif carousel.block_type == 'embed' %}
+        <div class="video-embed">
+          {% include_block carousel.value.video|safe %}
+        </div>
+        {% else %}
+        <div class="d-block">
+          <video class="d-block" id="background-video" autoplay loop muted>
+            <source src="{{ carousel.value.video.video.url }}" type="video/mp4">
+          </video>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <!-- -----------------caption-------------- -->
+  {% if page.banner_caption %}
+  {% for caption in page.banner_caption %}
+  {% include_block caption %}
+  {% endfor %}
+  {% endif %}
+  <!-- ---------------caption end---------------- -->
+</section>

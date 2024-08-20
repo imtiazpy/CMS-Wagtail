@@ -1,0 +1,49 @@
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4 {
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  color: #0d5BAF;
+  margin: 1.5rem 0;
+}
+
+.richtext-image {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.content p {
+  margin: 1rem 0;
+}
+
+.buttons-block {
+  display: inline-block;
+  width: fit-content;
+  background-color: #0D5BAF;
+  padding: 8px 20px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid #fff;
+  transition: all 0.5s ease;
+}
+
+.buttons-block a {
+  color: #fff;
+  display: inline-block;
+  width: fit-content;
+}
+
+.buttons-block:hover {
+  background-color: #054385;
+}

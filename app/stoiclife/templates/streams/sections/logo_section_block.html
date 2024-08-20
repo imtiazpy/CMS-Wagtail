@@ -1,0 +1,22 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<div class="{% if self.block_width == 'fluid' %} container-fluid {% else %} container {% endif %}">
+  <div class="row img-grid">
+    {% for item in self.logo_items %}
+    <div class="col-6 col-sm-3 col-md-1 custom-column-style border">
+      {% image item.logo max-600x400 as logo %}
+      <div class="d-flex h-100 w-100 justify-content-center align-items-center">
+        <img 
+          class="img-fluid pointer" 
+          data-open="{{ item.url.open_in_new }}" 
+          data-page="{{ item.url.src }}" 
+          onclick="redirectToPage(this)" 
+          src="{{ logo.url }}" 
+          alt="{{ logo.alt }}"
+          {% if self.grayscale %}style="filter: grayscale(100%);"{% endif %}
+        >
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

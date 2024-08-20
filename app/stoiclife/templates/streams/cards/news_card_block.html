@@ -1,0 +1,22 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+
+<div class="{% if self.block_width == 'fluid' %} container-fluid {% else %} container {% endif %}">
+  <div class="row row-cols-1" style="gap: 14px;">
+    <h2 class="cinzel-font-normal primary-font-color text-center">{{ self.heading }}</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 justify-content-center" style="gap: 14px;">
+      {% for card in self.cards %}
+      {% image card.page.banner_image fill-400x250 as news_banner %}
+      <div class="card news-card p-0" style="width: 18rem;" data-page="{{ card.page.url }}"
+        onclick="redirectToPage(this)">
+        <img src="{{ news_banner.url }}" class="card-img-top img-fluid w-100" alt="{{ news_banner.alt }}">
+        <div class="card-body">
+          <span>{{ card.page.created_at }}</span>
+          <h4 class="card-title primary-font-color news-card-title">{{ card.page.headline }}</h4>
+          <p class="card-text content">{{ card.page.content | richtext | truncatechars:100 }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

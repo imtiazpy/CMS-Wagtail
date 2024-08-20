@@ -1,0 +1,19 @@
+.poptrox-popup {
+  background: none !important;
+  position: relative !important;
+}
+
+.poptrox-popup .caption {
+  bottom: 60px !important;
+  color: white !important;
+  font-size: 1em;
+  overflow: hidden;
+  line-height: 24px !important;
+  padding: 10px;
+  text-shadow: 1px 1px 2px rgb(0, 0, 0), 0 0 1.5em rgb(0, 0, 0), 0 0 0.2em rgb(0, 0, 0);
+}
+
+.poptrox-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}

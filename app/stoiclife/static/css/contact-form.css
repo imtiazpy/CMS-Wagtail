@@ -1,0 +1,99 @@
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 70%;
+  gap: 10px;
+}
+
+.contact-form .g-recaptcha {
+  margin-top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-form p {
+  text-align: start;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+
+.contact-form p>label {
+  color: #0D5BAF;
+}
+
+.contact-form p>input,
+.contact-form p>textarea,
+.contact-form p > #id_dropdown {
+  display: block;
+  width: 50%;
+  padding: 10px 12px;
+  border-radius: 0;
+  border: 0.5px solid #ccc;
+
+  color: #111111;
+  background-color: #ffffff;
+}
+
+/* .contact-form p:has(input[required], textarea[required], select[required]) label::after {
+  content: "* ";
+  color: red;
+} */
+
+.contact-form p.flex-column {
+  flex-direction: column !important;
+  align-items: start;
+  justify-content: start;
+  gap: 10px;
+}
+
+
+.contact-form textarea {
+  height: 8em;
+}
+
+.contact-form div.u-form-submit {
+  width: 100%;
+}
+
+/* .contact-form button {
+  width: 100%;
+} */
+
+.contact-form .errorlist {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding: 0 10px;
+  margin-bottom: 0;
+}
+
+.errorlist li {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: rgb(240, 125, 125);
+}
+
+
+@media screen and (max-width: 550px) {
+  .contact-form p {
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+  }
+
+  .contact-form p>input,
+  .contact-form p>textarea {
+    width: 100%;
+  }
+}

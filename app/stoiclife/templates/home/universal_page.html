@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static news_link wagtailcore_tags wagtailimages_tags i18n %}
+{% get_news_link as news_page_link %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/poptrox.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<!-- ----------------------Banner Section start------------------ -->
+{% if self.banner_image %}
+<section class="carousel-section">
+  <div class="w-100 h-100" style="height: 20vh;">
+    {% image self.banner_image max-1920x1080 as img %}
+    <img src="{{ img.url }}" class="w-100 d-block img-fluid" alt="{{ img.alt }}">
+  </div>
+
+  {% if self.banner_caption %}
+    {% for caption in self.banner_caption %}
+    {% include_block caption %}
+    {% endfor %}
+  {% endif %}
+</section>
+{% endif %}
+<!-- -------------------Banner Section end---------------------- -->
+
+<!-- -----------------Content section start--------------------------- -->
+{% if self.content %}
+<section>
+  <div class="py-5">
+    <div class="d-flex flex-column" style="gap:80px;">
+      {% for single_content in self.content %}
+        <section>{% include_block single_content with content_index=forloop.counter0 %}</section>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+<!-- -----------------Content section end--------------------------- -->
+
+<!-- -------------------Person quote start--------------------- -->
+<section>
+  <div class="pt-5">
+    <div class="flex flex-column">
+      {% for quote_block in self.person_quote %}
+        <section>
+          {% include_block quote_block %}
+        </section>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- -------------------Person quote end--------------------- -->
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+  <script type="text/javascript" src="{% static 'js/poptrox/poptrox.js' %}"></script>
+{% endblock %}

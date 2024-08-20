@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags i18n %}
+
+{% block body_class %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/contact-form.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/poptrox.css' %}">
+{% endblock extra_css %}
+
+
+
+{% block content %}
+<!-- ----------------------Banner Section start------------------ -->
+{% if self.banner_image %}
+<section class="carousel-section">
+  <div class="w-100 h-100">
+    {% image self.banner_image max-1920x1080 as img %}
+    <img src="{{ img.url }}" class="w-100 d-block img-fluid" alt="{{ img.alt }}">
+  </div>
+
+  {% if self.banner_caption %}
+  {% for caption in self.banner_caption %}
+  {% include_block caption %}
+  {% endfor %}
+  {% endif %}
+</section>
+{% endif %}
+<!-- -------------------Banner Section end---------------------- -->
+
+<!-- -------------------Content Section----------------------- -->
+{% if self.content %}
+<section>
+  <div class="py-5">
+    <div class="d-flex flex-column" style="gap:80px;">
+      {% for content_block in self.content %}
+        <section>{% include_block content_block %}</section>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+<!-- --------------------Content Section End---------------------- -->
+
+<!-- ------------------Tab content section start--------------------- -->
+{% if self.tab_content %}
+<section>
+  <div class="py-5">
+    <div class="d-flex flex-column" style="gap:80px;">
+      {% for tab_block in self.tab_content %}
+        <section>{% include_block tab_block with content_index=forloop.counter0 %}</section>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+<!-- -----------------------Tab content section end----------------------- -->
+
+<!-- ---------------------Gallery Section----------------------------- -->
+{% if self.image_gallery %}
+<section>
+  <div class="py-5">
+    <div class="d-flex flex-column" style="gap:80px;">
+      {% for gallery_block in self.image_gallery %}
+        <section>{% include_block gallery_block %}</section>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+<!-- -------------------------Gallery Section End------------------------------ -->
+
+<!-- ----------------------Accordion Section----------------------- -->
+{% if self.accordion %}
+<section>
+  <div class="py-5">
+    <div class="d-flex flex-column" style="gap:80px;">
+      {% for accordion_block in self.accordion %}
+        <section>{% include_block accordion_block with content_index=forloop.counter0 %}</section>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+<!-- ----------------------Accordion Section End----------------------- -->
+
+<!-- ------------------------Contact Form Section---------------------- -->
+<section>
+  <div class="container py-5">
+    <div class="d-flex flex-column">
+      {% if self.contact_form_title %}
+        <h2 class="cinzel-font-bold primary-font-color mb-4">{{ self.contact_form_title }}</h2>
+      {% endif %}
+
+      <div class="d-flex justify-content-start justify-content-md-start">
+        <form action="{% pageurl self %}" id="c-form" class="contact-form" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% if error_msg %}
+          <p>{{ error_msg }}</p>
+          {% endif %}
+          <div class="w-100 d-flex justify-content-center">
+            <button type="submit" class="main-btn">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ------------------------Contact Form Section End---------------------- -->
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Get the input element with ID id_upload
+  const inputElements = document.querySelectorAll('input[type="file"]');
+  
+  // get the checkboxes div 
+  const checkboxes = document.querySelectorAll('div[id*="checkboxes"]');
+
+  // Get all the radio input elements
+  const formElement = document.getElementById('c-form'); //first get the form
+  const radioInputs = formElement.querySelectorAll('input[type="radio"]'); //then get the radio inside the form
+
+  // ===========Iterate over each input element==========
+  inputElements.forEach(input => {
+    // Check if the ID contains the word "upload"
+    if (input.id.includes('upload')) {
+      // Get the parent p element
+      const parentP = input.closest('p');
+      parentP.style.marginBottom = '10px'
+
+      input.style.padding = '0';
+      input.style.width = '50%';
+    }
+  });
+
+  // ===========Iterate over all checkboxes div==========
+  checkboxes.forEach(div => {
+    const parentPElem = div.previousElementSibling;
+    // Append the div to its previous sibling element
+    parentPElem.appendChild(div);
+  });
+
+
+  // ==========Iterate over all the radio input elements=========
+  // Create a Map to store the counts of radio inputs by their base id name
+  const radioCountsMap = new Map();
+
+  radioInputs.forEach(radio => {
+    // Extract the base id name by removing the suffix (e.g., '_0', '_1')
+    const baseId = radio.id.replace(/_\d+$/, '');
+
+    // If the base id is already in the map, increment the count
+    if (radioCountsMap.has(baseId)) {
+      radioCountsMap.set(baseId, radioCountsMap.get(baseId) + 1);
+    } else {
+      // Otherwise, add the base id to the map with an initial count of 1
+      radioCountsMap.set(baseId, 1);
+    }
+  });
+  // Convert the map to the desired array of objects
+  const radioCounts = Array.from(radioCountsMap.entries()).map(([id, count]) => ({ id, count }));
+
+  // Iterate over the radioCounts array
+  radioCounts.forEach(({ id }) => {
+    // Find the div with the matching id
+    const divElement = document.getElementById(id);
+    
+    if (divElement) {
+      // Find the previous sibling of the div element
+      const previousSibling = divElement.previousElementSibling;
+      
+      if (previousSibling) {
+        // Append the div into the previous sibling element
+        previousSibling.appendChild(divElement);
+      }
+    }
+  });
+
+  // ===========Asterisks for required fields===============
+  const paragraphs = document.querySelectorAll('.contact-form p');
+  
+  paragraphs.forEach(paragraph => {
+    const firstLabel = paragraph.querySelector('label');
+    
+    if (firstLabel) {
+      const hasRequiredField = paragraph.querySelector('input[required], textarea[required], select[required]');
+      
+      if (hasRequiredField) {
+        const asterisk = document.createElement('span');
+        asterisk.textContent = ' *';
+        asterisk.style.color = 'red';
+        firstLabel.appendChild(asterisk);
+      }
+    }
+  });
+</script>
+
+<script type="text/javascript" src="{% static 'js/poptrox/poptrox.js' %}"></script>
+{% endblock %}
+

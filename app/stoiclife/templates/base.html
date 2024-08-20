@@ -1,0 +1,105 @@
+{% load static cookie_tags contact_link wagtailcore_tags wagtailuserbar i18n %}
+
+{% get_cookie as cookie_consent %}
+{% get_sticky_contact as sticky_contact_link %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {% block title %}
+            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+            {% wagtail_site as current_site %}
+            {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+            {% endblock %}
+        </title>
+        {% if page.search_description %}
+        <meta name="description" content="{{ page.search_description }}" />
+        {% endif %}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+
+        {# Force all links in the live preview panel to be opened in a new tab #}
+        {% if request.in_preview_panel %}
+        <base target="_blank">
+        {% endif %}
+        
+        {# Google Font #}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+
+        {# Font awesome icon #}
+        <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
+        {# Global stylesheets #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/utility.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/richtext.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/custom-bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/banner.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/cards.css' %}">
+
+        {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+    <body class="open-sans-font h-auto position-relative">
+        {% comment %} {% wagtailuserbar %} {% endcomment %}
+        
+        {% include "includes/_header.html" %}
+
+        <main>
+            {% block content %}{% endblock %}
+
+            {% if sticky_contact_link != "#" %}
+            <div class="position-fixed z-3 top-50 end-0 translate-middle-y me-3">
+                {% include "includes/_sticky_contact.html" %}
+            </div>
+            {% endif %}
+
+            <div id="back-to-top-btn" class="position-fixed z-3 bottom-0 end-0 translate-middle-y mb-4 me-4 pointer">
+                
+                {% include "includes/_back_top.html" %}
+                
+            </div>
+
+            {% if cookie_consent.show_cookie_bar == True %}
+            <div class="position-fixed z-3 bottom-0 start-0 w-100 pointer">
+                {% include "includes/cookie_consent.html" %}
+            </div>
+            {% endif %}
+        </main>
+
+        {% include "includes/_footer.html" %}
+        
+
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/jquery/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/poptrox/poptrox.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+        <script type="text/javascript" src="{% static 'js/stoiclife.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/carousel.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/cookie.js' %}"></script>
+
+        {% block extra_js %}
+        {# Override this in templates to add extra javascript #}
+        {% endblock %}
+
+    </body>
+</html>

@@ -1,0 +1,49 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% image self.image max-1920x1080 as img %}
+
+<div class="{% if self.block_width == 'fluid' %} container-fluid {% else %} container {% endif %}">
+  {% if self.image_position == 'left' %}
+  <div class="row flex-row-reverse position-relative">
+    <div class="align-self-center {% if self.content_display_mode == 'overlay' %} col-lg-4 {% else %} col-md-6 {% endif %}">
+      <div class="{% if self.content_display_mode == 'overlay' %} overlay-content-right {% endif %}">
+        <div class="d-flex flex-column justify-content-center h-100 p-2 p-sm-3 p-md-4" style="gap: 14px;">
+          <h2 class="cinzel-font-normal primary-font-color">{{ self.heading }}</h2>
+          <h4>{{ self.subheading }}</h4>
+          <div class="content">{{ self.content|richtext }}</div>
+          {% if self.btn_label %}
+            <a class="main-btn" {% if self.url.open_in_new %}target="_blank"{% endif %} href="{{ self.url.src }}">
+              {{ self.btn_label }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="{% if self.content_display_mode == 'overlay' %} col-lg-8 {% else %} col-md-6 {% endif %} px-0">
+      <div class="d-flex flex-column justify-content-center h-100 w-100">
+        <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid object-fit-cover">
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="row position-relative">
+    <div class="align-self-center{% if self.content_display_mode == 'overlay' %} col-lg-4 {% else %} col-md-6 {% endif %}">
+      <div class="{% if self.content_display_mode == 'overlay' %} overlay-content-left {% endif %}">
+        <div class="d-flex flex-column justify-content-center h-100 p-2 p-sm-3 p-md-4" style="gap: 14px;">
+          <h2 class="cinzel-font-normal primary-font-color">{{ self.heading }}</h2>
+          <h4>{{ self.subheading }}</h4>
+          <div class="content">{{ self.content|richtext }}</div>
+          {% if self.btn_label %}
+            <a class="main-btn" {% if self.url.open_in_new %}target="_blank"{% endif %} href="{{ self.url.src }}">{{ self.btn_label }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="{% if self.content_display_mode == 'overlay' %} col-lg-8 {% else %} col-md-6 {% endif %} px-0">
+      <div class="d-flex flex-column justify-content-center h-100 w-100">
+        <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid object-fit-cover">
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>

@@ -1,0 +1,22 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% image self.image fill-800x400 as img %}
+
+<div class="{% if self.block_width == 'fluid' %} container-fluid {% else %} container {% endif %}">
+  <div class="row">
+    <div class="col-md-6 px-0">
+      <div class="d-flex flex-column justify-content-center h-100 w-100">
+        <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-fluid object-fit-cover">
+      </div>
+    </div>
+    <div class="col-md-6 primary-bg-color text-white" style="background-image: url('{% static 'images/section_bg.svg' %}'); background-position: right; background-repeat: no-repeat; background-size: contain">
+      <div class="d-flex flex-column justify-content-center h-100 py-4 px-2 px-sm-3 px-md-4" style="gap: 14px;">
+        <h2 class="cinzel-font-normal">{{ self.heading }}</h2>
+        <h6>{{ self.subheading }}</h6>
+        {% if self.btn_label %}
+          <a class="main-btn" {% if self.url.open_in_new %}target="_blank"{% endif %} href="{{ self.url.src }}">{{ self.btn_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

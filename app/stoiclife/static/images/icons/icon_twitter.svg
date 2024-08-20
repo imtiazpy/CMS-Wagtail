@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="51" height="52" viewBox="0 0 51 52">
+  <g id="Group_685" data-name="Group 685" transform="translate(-1111 -4390)">
+    <g id="Ellipse_31" data-name="Ellipse 31" transform="translate(1111 4390)" fill="#0d5baf" stroke="#fff" stroke-width="2">
+      <ellipse cx="25.5" cy="26" rx="25.5" ry="26" stroke="none"/>
+      <ellipse cx="25.5" cy="26" rx="24.5" ry="25" fill="none"/>
+    </g>
+    <g id="Group_682" data-name="Group 682" transform="translate(1111.6 4391.766)">
+      <path id="twitter" d="M26.664,9.8,35.1,0h-2L25.777,8.51,19.929,0H13.185l8.842,12.869L13.185,23.146h2l7.731-8.987,6.175,8.987h6.744L26.664,9.8Z" transform="translate(0.164 13.062)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

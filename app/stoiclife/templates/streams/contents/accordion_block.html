@@ -1,0 +1,33 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<div class="container">
+  <div class="d-flex flex-column" style="gap: 10px;">
+    <h2 class="cinzel-font-bold primary-font-color">{{ self.heading }}</h2>
+
+    <div>
+      <div class="accordion" id="accordionExample">
+        {% for item in self.content %}
+        {% image item.image fill-400x200 as img %}
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button custom-accordion-btn" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapse-{{ content_index }}-{{ forloop.counter0 }}" aria-expanded="true"
+              aria-controls="collapse-{{ content_index }}-{{ forloop.counter0 }}">
+              {{ item.title }}
+            </button>
+          </h2>
+          <div id="collapse-{{ content_index }}-{{ forloop.counter0 }}" class="accordion-collapse collapse"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="d-flex flex-wrap flex-md-nowrap" style="gap: 10px;">
+                <p>{{ item.text }}</p>
+                <img class="img-fluid" src="{{ img.url }}" alt="{{ img.alt }}">
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

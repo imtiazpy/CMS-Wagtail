@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags i18n %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/news.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container py-5">
+  <h1 class="cinzel-font-bold primary-font-color mb-4">News</h1>
+
+  <div class="d-flex flex-column flex-sm-row align-items-center mb-4">
+    <div class="me-4 mb-4">
+      <form method="GET" id="category-form">
+        <select class="py-1 px-3" name="category" id="category-select">
+          <option value="all">--All Categories--</option>
+          {% for category in categories %}
+          <option value="{{ category }}" >{{ category }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </div>
+
+    <form action="{% pageurl self %}" method="GET" class="d-flex align-items-center p-0 mb-4">
+      <div class="border border-secondary">
+        <input id="search-input" class="rounded-0 border-0 py-1 px-2" type="text" name="search" placeholder="Search...">
+      </div>
+      <button id="search-btn" type="submit" class="btn primary-bg-color rounded-0 rounded-end-circle text-white py-1 px-2 ">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+  </div>
+
+  <div class="row row-cols-1 gy-5">
+    {% for single_news in news %}
+    {% image single_news.banner_image fill-600x200 as img %}
+    <div class="col">
+      <div class="row row-cols-1 row-cols-md-2">
+        <div class="col">
+          <div class="d-flex flex-column" style="gap: 4px;">
+            <div class="d-flex align-items-center mb-3">
+              <p class="me-2">{{ single_news.created_at }}</p>
+              <span>|</span>
+              <div class="ms-2">
+                {% for category in single_news.categories.all %}
+                  <span>{{ category.name }}</span>
+                {% endfor %}
+              </div>
+            </div>
+            <h2 class="cinzel-font-normal primary-font-color">{{ single_news.headline }}</h2>
+            <p class="content">{{ single_news.content | richtext | truncatechars:400 }}</p>
+            <a class="primary-font-color" href="{{ single_news.url }}">Read More</a>
+          </div>
+        </div>
+        <div class="col" style="height: 100px;">
+          <img class="img-fluid object-fit-cover" src="{{ img.url }}" alt="{{ img.alt }}">
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Get the selected category from the Django
+  const SelectedCategory = "{{ selected_category }}";
+
+  // Get the category select element
+  const categorySelect = document.getElementById("category-select");
+
+  // Function to submit the form when the select option changes
+  function submitForm() {
+      document.getElementById("category-form").submit();
+  }
+
+  // Attach the onchange event handler to the select element
+  categorySelect.addEventListener("change", submitForm);
+
+  // Set the selected attribute based on the initial value
+  if (SelectedCategory !== 'None') {
+      categorySelect.value = SelectedCategory;
+  } else {
+      // If no initial category is selected, set it to "all"
+      categorySelect.value = "all";
+  }
+
+</script>
+{% endblock %}

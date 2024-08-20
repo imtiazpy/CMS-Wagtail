@@ -1,0 +1,34 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<div class="{% if self.block_width == 'fluid' %} container-fluid px-0 {% else %} container {% endif %}">
+  <div id="sliderCarouselGallery" class="carousel">
+    <div class="carousel-inner gallery-carousel-inner pop-gallery">
+      {% for item in self.images %}
+      {% image item.image fill-1920x1080 as thumb %}
+      {% image item.image max-1920x1080 as img %}
+      <div class="thumb carousel-item gallery-carousel-item {% if 0 == forloop.counter0 %} active {% endif %}" style="background: rgba(0, 0, 0, 0.9);">
+
+        <a href="{{ img.url }}" class="anchor-img">
+          <img src="{{ thumb.url }}" class="w-100 img-fluid pointer" alt="{{ thumb.alt }}" style="opacity: 0.7;" title="{{ item.caption }}">
+        </a>
+
+          <div class="carousel-caption start-0 bottom-0 ms-4 shadow-lg">
+            <div class="d-flex flex-column align-items-start justify-content-start" style="gap: 10px;">
+              <h5 class="shadow-lg fw-semibold">{{ item.title }}</h5>
+            </div>
+          </div>
+      </div>
+
+      {% endfor %}
+
+    </div>
+    <button class="carousel-control-prev gallery-carousel-control-prev" type="button"
+      data-bs-target="#sliderCarouselGallery" data-bs-slide="prev">
+      <i class="fa-solid fa-chevron-left fs-1"></i>
+    </button>
+    <button class="carousel-control-next gallery-carousel-control-next" type="button"
+      data-bs-target="#sliderCarouselGallery" data-bs-slide="next">
+      <i class="fa-solid fa-chevron-right fs-1"></i>
+    </button>
+  </div>
+</div>

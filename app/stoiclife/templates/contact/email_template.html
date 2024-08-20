@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .container {
+      padding: 10px;
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .message-value {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .contact-value {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+  </style>
+  <title>New Contact Form Submission</title>
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <h2 class="heading">New Message from - <strong>{{ form_data.name }}</strong></h2>
+
+      <div class="message-value">{{ form_data.message }}</div>
+
+      <div class="contact-value">Name: {{ form_data.name }}</div>
+      <div class="contact-value">Email: {{ form_data.email }}</div>
+      <div class="contact-value">Phone: {{ form_data.phone }}</div>
+    </div>
+  </main>
+</body>
+
+</html>

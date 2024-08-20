@@ -1,0 +1,18 @@
+
+
+
+.Draftail-block--BUTTONS {
+  display: inline-block;
+  width: fit-content;
+  background-color: #0D5BAF;
+  padding: 8px 20px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid #fff;
+}
+
+.Draftail-block--BUTTONS a {
+  color: #fff;
+}

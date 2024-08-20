@@ -1,0 +1,16 @@
+@media screen and (min-width: 576px) {
+  .carousel-inner.gallery-carousel-inner {
+    display: flex;
+  }
+  
+  .carousel-item.gallery-carousel-item {
+    display: block;
+    margin-right: 0;
+    flex: 0 0 calc(100%/3.7);
+  }
+}
+
+.accordion-button.custom-accordion-btn:not(.collapsed) {
+  background-color: gray;
+  color: white;
+}

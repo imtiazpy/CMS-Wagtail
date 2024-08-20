@@ -1,0 +1,35 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<div class="{% if self.block_width == 'fluid' %} container-fluid {% else %} container {% endif %}">
+  <div class="row">
+    <div class="col-md-6 align-self-center">
+      <div class="d-flex justify-content-center align-items-center p-5">
+        <div class="d-flex flex-column" style="gap: 20px;">
+          <h2>{{ self.heading }}</h2>
+          <div>{{ self.content }}</div>
+          {% if self.btn_label %}
+          <a href="{{ self.url.src }}" {% if self.url.open_in_new %}target="_blank" {% endif %} class="main-btn">
+            {{ self.btn_label }}
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 px-0">
+      <div class="row row-cols-1 row-cols-sm-2 g-0 pop-gallery">
+        {% for item in self.images %}
+        {% image item.image fill-1920x1080 as thumb %}
+        {% image item.image max-1920x1080 as img %}
+        <div class="col thumb">
+
+          <a href="{{ img.url }}" class="anchor-img">
+            <img class="img-fluid w-100 pointer" src="{{ thumb.url }}" alt="{{ thumb.alt }}" title="{{ item.caption }}">
+          </a>
+
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

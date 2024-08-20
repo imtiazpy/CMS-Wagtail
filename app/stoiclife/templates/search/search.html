@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static news_link wagtailcore_tags wagtailimages_tags i18n %}
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="container py-5">
+  <div class="d-block w-100 border rounded">
+    <form action="{% url 'search' %}" method="GET" class="d-flex align-items-center p-0 position-relative">
+      <input id="search-input" class="rounded-0 border-0 py-1 px-5 w-100" type="text" name="query"
+        placeholder="Search...">
+      <button id="search-btn" type="submit" class="btn py-1 px-2 position-absolute top-0 start-0">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+  </div>
+
+  <div>
+    {% if search_results %}
+    <div class="d-flex flex-column mt-4" style="gap: 20px;">
+      {% for result in search_results %}
+      <div class="search-result py-2 px-4 border rounded d-flex flex-column" style="gap: 6px;">
+        <a class="d-block w-100 primary-font-color fs-3" href="{{ result.url }}">{{result.title}}</a>
+
+        {% if result.seo_title %}
+        <span class="fs-4">{{ result.seo_title }}</span>
+        {% endif %}
+
+        {% if result.search_description %}
+        <span>{{ result.search_description }}</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if search_results.has_previous %}
+    <a
+      href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% if search_results.has_next %}
+    <a
+      href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
+    {% endif %}
+
+    {% elif search_query %}
+    <div class="d-flex justify-content-center align-items-center">
+      <img class="img-fluid w-50 h-50" src="{% static 'images/not-found.jpg' %}" alt="Not found image">
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+
+{% endblock content %}

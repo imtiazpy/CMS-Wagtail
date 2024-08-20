@@ -1,0 +1,18 @@
+{% load static cookie_tags wagtailcore_tags wagtailimages_tags %}
+
+{% get_cookie as cookie_consent %}
+
+
+<div class="d-none" id="cookie-consent-bar" style="background-color: rgb(218, 217, 217);">
+  <div class="container py-4">
+    <div class="d-flex justify-content-start align-items-center flex-wrap flex-md-nowrap" style="gap: 20px;">
+      <div class="content">{{ cookie_consent.content|richtext }}</div>
+      <button id="accept-cookies" class="main-btn">
+        {{ cookie_consent.accept_btn_label }}
+      </button>
+      <button id="reject-cookies" class="main-btn">
+        {{ cookie_consent.reject_btn_label }}
+      </button>
+    </div>
+  </div>
+</div>

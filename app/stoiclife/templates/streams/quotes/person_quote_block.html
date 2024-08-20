@@ -1,0 +1,48 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<div 
+  class="container pt-5" 
+  style="
+    background-image: 
+      url('../../../static/images/bg_double-quotes.svg'); 
+      background-repeat: no-repeat;
+      background-size: 15%; 
+      background-position: top left;
+  "
+>
+  <div class="row">
+    <div class="col-12 col-lg-7">
+      <div class="py-5">
+        <div class="text-center text-md-start">
+          <div class="quote fs-3 fw-medium">
+            {{ self.quote }}
+          </div>
+          {% if self.btn_label %}
+          <div class="mt-4">
+            <a {% if self.url.open_in_new %}target="_blank" {% endif %} href="{{ self.url.src }}" class="main-btn">
+              {{ self.btn_label }}
+            </a>
+          </div>
+          {% endif %}
+          <div class="mt-4 mb-md-4 float-lg-end">
+            <h4 class="primary-font-color">{{ self.author_name }}</h4>
+            <p class="mt-2">{{ self.author_speciality }}</p>
+            {% if self.contact %}
+            <p class="primary-font-color mt-2">
+              <i class="fa-solid fa-phone primary-font-color"></i>
+              {{ self.contact }}
+            </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-5">
+      {% image self.author_photo max-400x450 as img %}
+      <div class="d-flex align-items-end justify-content-left h-100">
+        <img class="img-fluid" src="{{ img.url }}" alt="{{ img.alt }}">
+      </div>
+    </div>
+  </div>
+</div>

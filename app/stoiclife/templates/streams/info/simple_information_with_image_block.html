@@ -1,0 +1,30 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<div class="row position-relative g-4">
+  <div class="d-block d-lg-none col-lg-4 col-12">
+    {% if self.image %}
+      {% image self.image fill-200x200 as img %}
+      <div class="rounded-circle border" style="width: 250px; height: 250px;">
+        <img class="w-100 h-100 rounded-circle" src="{{ img.url }}" alt="{{ img.alt }}">
+      </div>
+    {% endif %}
+  </div>
+  <div class="col-lg-4 col-12">
+    <h4 class="fw-normal">{{ self.heading }}</h4>
+  </div>
+  <div class="col-lg-4 col-12">
+    <div class="d-flex flex-column">
+      {% for info in self.information %}
+        <p class="{% if info.info_type == 'email' %}primary-font-color{% endif %}">{{ info.info }}</p>
+      {% endfor %}
+    </div>
+  </div>
+  {% if self.image %}
+    <div class="col-lg-4 col-12 d-lg-block d-none">
+      {% image self.image fill-200x200 as img %}
+      <div class="rounded-circle border position-absolute d-lg-block d-none" style="width: 250px; height: 250px; top: -60px;">
+        <img class="w-100 h-100 rounded-circle" src="{{ img.url }}" alt="{{ img.alt }}">
+      </div>
+    </div>
+  {% endif %}
+</div>

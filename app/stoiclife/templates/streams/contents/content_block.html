@@ -1,0 +1,15 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<div class="container">
+  <div class="d-flex flex-column" style="gap: 10px;">
+    <div>
+      <h1 class="primary-font-color cinzel-font-bold">{{ self.heading }}</h1>
+    </div>
+    <div>
+      <h4>{{ self.subheading }}</h4>
+    </div>
+    <div class="content">
+      {{ self.content | richtext }}
+    </div>
+  </div>
+</div>

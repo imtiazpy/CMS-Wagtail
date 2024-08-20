@@ -1,0 +1,15 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<div class="row position-relative g-4">
+  <div class="col-lg-4 col-12">
+    <h4 class="fw-normal">{{ self.heading }}</h4>
+  </div>
+  <div class="col-lg-4 col-12">
+    <div class="d-flex flex-column">
+      {% for info in self.information %}
+        <p class="{% if info.info_type == 'email' %}primary-font-color{% endif %}">{{ info.info }}</p>
+      {% endfor %}
+    </div>
+  </div>
+  
+</div>

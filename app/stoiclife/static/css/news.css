@@ -1,0 +1,7 @@
+#search-input:focus {
+  outline: none;
+}
+
+#category-select:focus {
+  outline: none;
+}

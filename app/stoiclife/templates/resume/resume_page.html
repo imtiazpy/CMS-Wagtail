@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static news_link wagtailcore_tags wagtailimages_tags i18n %}
+
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="container py-5">
+
+  <h2 class="fw-medium">{{ self.name }}</h2>
+
+  {% if self.content %}
+  <section>
+    <div class="py-5">
+      <div class="d-flex flex-column" style="gap:80px;">
+        {% for block in self.content %}
+        <section>{% include_block block %}</section>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+</div>
+
+{% endblock content %}

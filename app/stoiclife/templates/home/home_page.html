@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static news_link wagtailcore_tags wagtailimages_tags i18n %}
+{% get_news_link as news_page_link %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/poptrox.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<!-- -----------------Carousel/Banner section------------------- -->
+<section>
+  {% for block in self.header_carousel %}
+    {% include_block block %}
+  {% endfor %}
+</section>
+<!-- ------------------Banner section end----------------------- -->
+
+<!-- ------------------Content Section start---------------------- -->
+{% if self.content %}
+<section>
+  <div class="py-5">
+    <div class="d-flex flex-column" style="gap:80px;">
+      {% for block in self.content %}
+        <section>{% include_block block with content_index=forloop.counter0 %}</section>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+<!-- ------------------Content Section end---------------------- -->
+
+<!-- -------------------Person quote start--------------------- -->
+<section>
+  <div class="pt-5">
+    <div class="flex flex-column">
+      {% for quote_block in self.person_quote %}
+        <section>
+          {% include_block quote_block %}
+        </section>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- -------------------Person quote end--------------------- -->
+
+{% endblock content %}
+
+
+{% block extra_js %}
+  <script type="text/javascript" src="{% static 'js/poptrox/poptrox.js' %}"></script>
+{% endblock %}

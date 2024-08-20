@@ -1,0 +1,56 @@
+.main-btn {
+  display: inline-block;
+  width: fit-content;
+  background-color: #0D5BAF;
+  padding: 8px 20px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid #fff;
+  transition: all 0.5s ease;
+}
+
+.main-btn:hover {
+  background-color: #054385;
+}
+
+
+.quote-slider-indicator {
+  box-sizing: content-box;
+  flex: 0 1 auto;
+  width: 10px; 
+  height: 10px;
+  padding: 0;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: #9e9c9c !important;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: 100%;
+}
+
+.quote-slider-indicator.active {
+  background-color: #0D5BAF !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+#search-input:focus {
+  outline: none;
+}
+
+.search-result:hover {
+  background-color: rgb(212, 208, 208);
+  cursor: pointer;
+}
+
+.content ul {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+

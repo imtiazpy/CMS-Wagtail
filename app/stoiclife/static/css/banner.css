@@ -1,0 +1,82 @@
+.carousel-section {
+  position: relative;
+  height: clamp(300px, 697px, 40%);
+}
+
+.carousel-section .carousel-item img,
+.carousel-section .carousel-item video,
+.carousel-section .carousel-item .video-embed {
+  width: 100%;
+  object-fit: cover;
+}
+
+.carousel-section .carousel-item iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* .carousel-control-prev, 
+.carousel-control-next {
+  z-index: 99999;
+} */
+
+.carousel-indicators [data-bs-target] {
+  box-sizing: content-box;
+  flex: 0 1 auto;
+  width: 10px; 
+  height: 10px;
+  padding: 0;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 0;
+  opacity: .5;
+  transition: opacity .6s ease;
+  border-radius: 100%; /* add border-radius */
+}
+
+.carousel-indicators [data-bs-target].active {
+  opacity: 1;
+}
+
+.cta {
+  position: absolute;
+  width: clamp(200px, 40%, 400px);
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  background-color: rgba(255, 255, 220, 0.01);
+  backdrop-filter: blur(10px);
+}
+
+.cta h4 {
+  font-size: clamp(12px, 24px, 1.5rem);
+}
+
+.cta p {
+  font-size: clamp(12px, 18px, 1rem);
+}
+
+.cta-btn {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  z-index: 100;
+}
+
+.cta-offcanvas {
+  color: #fff;
+  background-color: rgba(255, 255, 220, 0.01);
+  backdrop-filter: blur(10px);
+  width: clamp(200px, 40%, 400px);
+  height: clamp(200px, 40%, 300px);
+
+}
+
+#banner-caption-btn {
+  z-index: 99999;
+}

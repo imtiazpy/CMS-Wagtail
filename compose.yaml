@@ -1,0 +1,23 @@
+services:
+  web:
+    build: ./app
+    command: /usr/src/app/scripts/entrypoint.sh
+    volumes:
+      - ./app/:/usr/src/app/
+    image: tenz-img:latest
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env.dev
+  
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+    - POSTGRES_USER=hello_wagtail
+    - POSTGRES_PASSWORD=hello_wagtail
+    - POSTGRES_DB=hello_wagtail_dev
+
+volumes:
+  postgres_data:
