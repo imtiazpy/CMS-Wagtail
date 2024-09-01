@@ -50,7 +50,7 @@
           {% for quick in quick_nav %}
           <a class="{% if quick.is_hovered %}hovered{% endif %}" {% if quick.open_in_new_tab %} target="_blank" {% endif %} href="{{ quick.link }}">{{ quick.title }}</a>
           {% endfor %}
-          <form id="lang-selector" action="{% url 'set_language' %}" method="post">
+          <!-- <form id="lang-selector" action="{% url 'set_language' %}" method="post">
             {% csrf_token %}
             <select name="language" onchange="this.form.submit()">
               {% for lang_code, lang_name in LANGUAGES %}
@@ -62,7 +62,15 @@
               {% endlanguage %}
               {% endfor %}
             </select>
-          </form>
+          </form> -->
+
+          {% for translation in page.get_translations.live %}
+          {% get_language_info for translation.locale.language_code as lang %}
+          <a href="{% pageurl translation %}" rel="alternate" hreflang="{{ lang.code }}">
+              {{ lang.name_local }}
+          </a>
+          {% endfor %}
+
         </div>
       </div>
     </div>
