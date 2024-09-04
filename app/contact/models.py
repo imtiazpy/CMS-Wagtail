@@ -31,6 +31,7 @@ from modelcluster.fields import ParentalKey
 from streams.blocks.banners import BannerCaptionBlock
 from streams.blocks.contents import ContentBlock, TabContentBlock, AccordionBlock
 from streams.blocks.gallery import GalleryBlock
+from core.translations import TranslatablePageMixin
 
 
 class ExtendedFormBuilder(WagtailCaptchaFormBuilder):
@@ -88,7 +89,7 @@ class CustomSubmissionsListView(SubmissionsListView):
 
 
 
-class ContactPage(WagtailCaptchaForm):
+class ContactPage(TranslatablePageMixin, WagtailCaptchaForm):
     parent_page_types = [
         'home.HomePage',
         'home.UniversalPage'

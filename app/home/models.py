@@ -15,8 +15,9 @@ from streams.blocks.sections import FlexBlock, BlueSectionBlock, LogoSectionBloc
 from streams.blocks.quotes import RandomQuoteBlock, PersonQuoteBlock
 from streams.blocks.banners import BannerCaptionBlock, HeaderCarouselBlock
 from streams.blocks.gallery import GalleryBlock
+from core.translations import TranslatablePageMixin
 
-class HomePage(Page):
+class HomePage(TranslatablePageMixin, Page):
     """Home page Definition for the Root of the site, all pages will be under this page"""
     
     max_count = 1
@@ -89,7 +90,7 @@ class HomePage(Page):
 
 
 
-class UniversalPage(Page):
+class UniversalPage(TranslatablePageMixin, Page):
     """Model for universal page"""
     parent_page_types = [
         'home.HomePage',

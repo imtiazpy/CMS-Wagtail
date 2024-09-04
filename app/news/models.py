@@ -8,10 +8,11 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.snippets.models import register_snippet
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from core.translations import TranslatablePageMixin
 
 
 
-class NewsIndex(Page):
+class NewsIndex(TranslatablePageMixin, Page):
 
 	parent_page_types = [
     	'home.HomePage',
@@ -74,7 +75,7 @@ class NewsCategory(TranslatableMixin):
 		verbose_name_plural = 'News Categories'
 
 
-class News(Page):
+class News(TranslatablePageMixin, Page):
 	parent_page_types = [
 		'news.NewsIndex'
 	]

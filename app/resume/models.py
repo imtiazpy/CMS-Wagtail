@@ -5,8 +5,10 @@ from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel
 from streams.blocks.info import SimpleInformationBlock, SimpleInformationWithImageBlock, TimelineInformationBlock
 
+from core.translations import TranslatablePageMixin
 
-class ResumePage(Page):
+
+class ResumePage(TranslatablePageMixin, Page):
     """Page model for a resume page"""
 
     parent_page_types = [

@@ -63,6 +63,8 @@ LOCAL_APPS = [
     "site_settings",
     "contact",
     "resume",
+    "core",
+    "language_switcher",
 ]
 
 THIRD_PARTY_APPS = [

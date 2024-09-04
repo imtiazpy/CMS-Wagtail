@@ -52,6 +52,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/custom-bootstrap.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/banner.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/cards.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/language_switcher/switcher.css' %}">
 
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
@@ -63,7 +64,7 @@
         
         {% include "includes/_header.html" %}
 
-        <main>
+        <main style="min-height: 70vh;">
             {% block content %}{% endblock %}
 
             {% if sticky_contact_link != "#" %}

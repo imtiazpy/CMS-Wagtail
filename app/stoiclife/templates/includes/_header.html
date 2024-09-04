@@ -1,6 +1,9 @@
-{% load static menu_tags i18n wagtailcore_tags wagtailimages_tags %}
+{% load static menu_tags i18n wagtailcore_tags wagtailimages_tags switcher_tags %}
 {% get_menu 'main' as navigation %}
 {% get_quick_menu as quick_nav %}
+
+{% static "images/icons/flags.svg" as flags %}
+{% language_switcher as switcher %}
 
 <header class="navbar navbar-expand-lg fixed-top header-menu py-0">
   <div class="container pb-3 menu-container">
@@ -50,7 +53,9 @@
           {% for quick in quick_nav %}
           <a class="{% if quick.is_hovered %}hovered{% endif %}" {% if quick.open_in_new_tab %} target="_blank" {% endif %} href="{{ quick.link }}">{{ quick.title }}</a>
           {% endfor %}
-          <!-- <form id="lang-selector" action="{% url 'set_language' %}" method="post">
+
+
+          {% comment %} <form id="lang-selector" action="{% url 'set_language' %}" method="post">
             {% csrf_token %}
             <select name="language" onchange="this.form.submit()">
               {% for lang_code, lang_name in LANGUAGES %}
@@ -62,14 +67,46 @@
               {% endlanguage %}
               {% endfor %}
             </select>
-          </form> -->
+          </form> {% endcomment %}
 
-          {% for translation in page.get_translations.live %}
+
+
+          {% comment %} {% for translation in page.get_translations.live %}
           {% get_language_info for translation.locale.language_code as lang %}
           <a href="{% pageurl translation %}" rel="alternate" hreflang="{{ lang.code }}">
               {{ lang.name_local }}
           </a>
-          {% endfor %}
+          {% endfor %} {% endcomment %}
+
+
+          <div class="dropdown switcher-menu">
+            <a class="dropdown-toggle"
+              title="{{ switcher.current.get_display_name }}"
+              data-bs-toggle="dropdown"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false">
+                <svg class="switcher-flag" viewBox="0 0 640 480">
+                    <use href="{{ flags }}#{{ switcher.current.language_code }}" />
+                </svg>
+            </a>
+            <ul class="dropdown-menu px-3">
+            {% for lang in switcher.alternatives %}
+              <li>
+                <a class="dropdown-item d-flex gap-2"
+                  href="{{ lang.url }}"
+                  title="{{ lang.name }}"
+                  rel="nofollow">
+                    <svg class="switcher-flag" viewBox="0 0 640 480">
+                        <use href="{{ flags }}#{{ lang.code }}" />
+                    </svg>
+                    <div>{{ lang.name }}</div>
+                </a>
+              </li>
+            {% endfor %}  
+            </ul>
+          </div>
+
 
         </div>
       </div>
