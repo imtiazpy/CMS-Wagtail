@@ -238,7 +238,7 @@ class ContactPage(TranslatablePageMixin, WagtailCaptchaForm):
 
         html_message = render_to_string('contact/email_template.html', {'form_data': cleaned_data})
         send_mail(
-            'Stoicism Contact Form: New Submission',
+            'Contact Form: New Submission',
             strip_tags(html_message),
             settings.FROM_EMAIL,
             settings.RECIPIENT_LIST,

@@ -3,8 +3,8 @@ function checkCookieConsent() {
   const cookies = document.cookie.split(';');
   for (let i = 0; i < cookies.length; i++) {
     const cookie = cookies[i].trim();
-    if (cookie.startsWith('stoic_cookie_consent=')) {
-      return cookie.substring('stoic_cookie_consent='.length);
+    if (cookie.startsWith('cookie_consent=')) {
+      return cookie.substring('cookie_consent='.length);
     }
   }
   return null;
@@ -31,7 +31,7 @@ const accept_cookies = document.getElementById('accept-cookies');
 
 
 document.getElementById('accept-cookies').addEventListener('click', function () {
-  document.cookie = 'stoic_cookie_consent=accepted; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
+  document.cookie = 'cookie_consent=accepted; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
   hideCookieConsentBar();
 });
 
@@ -40,7 +40,7 @@ const reject_cookies = document.getElementById('reject-cookies');
 
 
 document.getElementById('reject-cookies').addEventListener('click', function () {
-  document.cookie = 'stoic_cookie_consent=rejected; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
+  document.cookie = 'cookie_consent=rejected; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
   window.show_cookie_consent = false;
   hideCookieConsentBar();
 });
