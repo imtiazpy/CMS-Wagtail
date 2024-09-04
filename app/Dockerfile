@@ -7,7 +7,10 @@ RUN useradd wagtail
 
 WORKDIR /usr/src/app
 RUN mkdir /usr/src/app/staticfiles
-# RUN mkdir /usr/src/app/mediafiles
+
+# create mediafiles directory if not already existing
+RUN mkdir /usr/src/app/mediafiles
+
 RUN chown -R wagtail:wagtail /usr/src/app
 
 # Port used by this container to serve HTTP.
@@ -47,9 +50,10 @@ USER wagtail
 RUN sed -i 's/\r$//g' /usr/src/app/scripts/entrypoint.sh
 RUN chmod +x /usr/src/app/scripts/entrypoint.sh
 
-RUN chmod +x /usr/src/app/mediafiles && \
-    chown -R wagtail:wagtail /usr/src/app/mediafiles && \
-    chown wagtail:wagtail /usr/src/app/db.sqlite3
+# uncomment bellow command if mediafiles and sqlite3 is already existing
+# RUN chmod +x /usr/src/app/mediafiles && \
+#     chown -R wagtail:wagtail /usr/src/app/mediafiles && \
+#     chown wagtail:wagtail /usr/src/app/db.sqlite3
 
 # run entrypoint.sh
 ENTRYPOINT ["/usr/src/app/scripts/entrypoint.sh"]

@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.utils.translation import gettext as _
 from wagtail.models import Page
@@ -87,6 +88,12 @@ class HomePage(TranslatablePageMixin, Page):
         verbose_name = "Home page"
         verbose_name_plural = "Home pages"
 
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+
+        context['PID'] = os.getpid()
+        return context
 
 
 
