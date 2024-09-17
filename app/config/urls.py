@@ -14,7 +14,7 @@ urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
-    path('i18n/', include('django.conf.urls.i18n')),
+    # path('i18n/', include('django.conf.urls.i18n')), #use it when you use set_language view from django
     path('lang/<str:language_code>/', set_language_from_url, name='set_language_from_url'),
 ]
 

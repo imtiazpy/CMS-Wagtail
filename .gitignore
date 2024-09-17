@@ -63,6 +63,7 @@ db.sqlite3-journal
 
 media/
 mediafiles/
+staticfiles/
 
 # Flask stuff:
 instance/
@@ -128,6 +129,9 @@ celerybeat.pid
 .env
 .env.prod
 .env.prod.db
+.env.staging
+.env.staging.db
+.env.staging.proxy-companion
 .venv
 env/
 venv/
