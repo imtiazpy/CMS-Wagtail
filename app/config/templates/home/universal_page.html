@@ -8,6 +8,15 @@
 
 {% block content %}
 <!-- ----------------------Banner Section start------------------ -->
+
+{% if self.header_carousel %}
+<section class="mb-5">
+  {% for block in self.header_carousel %}
+    {% include_block block %}
+  {% endfor %}
+</section>
+{% endif %}
+
 {% if self.banner_image %}
 <section class="carousel-section">
   <div class="w-100 h-100" style="height: 20vh;">
@@ -25,12 +34,12 @@
 <!-- -------------------Banner Section end---------------------- -->
 
 <!-- -----------------Content section start--------------------------- -->
-{% if self.content %}
+{% if self.sections %}
 <section>
   <div class="py-5">
     <div class="d-flex flex-column" style="gap:80px;">
-      {% for single_content in self.content %}
-        <section>{% include_block single_content with content_index=forloop.counter0 %}</section>
+      {% for section in self.sections %}
+        <section>{% include_block section with content_index=forloop.counter0 %}</section>
       {% endfor %}
     </div>
   </div>

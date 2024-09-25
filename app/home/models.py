@@ -113,6 +113,15 @@ class UniversalPage(TranslatablePageMixin, Page):
 
     template = "home/universal_page.html"
 
+    header_carousel = StreamField(
+        [('carousel', HeaderCarouselBlock()),],
+        block_counts = {
+            'carousel': {'max_num': 1}
+        },
+        null=True,
+        blank=True
+    )
+
     banner_image = models.ForeignKey(
         'wagtailimages.Image',
         on_delete=models.SET_NULL,
@@ -131,7 +140,7 @@ class UniversalPage(TranslatablePageMixin, Page):
         use_json_field=True
     )
 
-    content = StreamField(
+    sections = StreamField(
         [
             ("content_block", ContentBlock()),
             ("news_card", NewsCardBlock()),
@@ -161,11 +170,12 @@ class UniversalPage(TranslatablePageMixin, Page):
 
     content_panels = [
         TitleFieldPanel('title', classname='title'),
-        FieldPanel('content'),
+        FieldPanel('sections'),
         FieldPanel('person_quote')
     ]
 
     banner_panels = [
+        FieldPanel('header_carousel'),
         FieldPanel('banner_image'),
         FieldPanel('banner_caption')
     ]

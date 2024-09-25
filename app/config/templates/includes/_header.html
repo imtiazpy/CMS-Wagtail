@@ -75,7 +75,7 @@
 
 
           <div class="dropdown switcher-menu">
-            <a class="dropdown-toggle"
+            <a class="{% if switcher.alternatives %}dropdown-toggle{% endif %}"
               title="{{ switcher.current.get_display_name }}"
               data-bs-toggle="dropdown"
               role="button"
@@ -85,6 +85,7 @@
                     <use href="{{ flags }}#{{ switcher.current.language_code }}" />
                 </svg>
             </a>
+            {% if switcher.alternatives %}
             <ul class="dropdown-menu px-3">
             {% for lang in switcher.alternatives %}
               <li>
@@ -100,6 +101,7 @@
               </li>
             {% endfor %}  
             </ul>
+            {% endif %}
           </div>
 
 
