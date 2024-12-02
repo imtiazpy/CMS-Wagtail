@@ -1,23 +1,41 @@
 services:
   web:
-    build: ./app
+    build: 
+      context: ./app
+      dockerfile: Dockerfile
     command: /usr/src/app/scripts/entrypoint.sh
     volumes:
-      - ./app/:/usr/src/app/
-    image: tenz-img:latest
-    ports:
-      - 8000:8000
+      - static_volume:/usr/src/app/staticfiles
+      - media_volume:/usr/src/app/mediafiles
+    image: cms-img-prod:latest
+    container_name: cms-container-prod
+    expose:
+      - 8000
     env_file:
-      - ./.env.dev
-  
+      - ./.env
+    depends_on:
+      - db
   db:
     image: postgres:15
+    container_name: cms-db-prod
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:
-    - POSTGRES_USER=hello_wagtail
-    - POSTGRES_PASSWORD=hello_wagtail
-    - POSTGRES_DB=hello_wagtail_dev
+    env_file:
+      - ./.env.db
+
+  nginx:
+    build: ./nginx
+    volumes:
+    - static_volume:/usr/src/app/staticfiles/
+    - media_volume:/usr/src/app/mediafiles/
+    image: nginx-img-prod:latest
+    container_name: nginx-proxy-prod
+    ports:
+      - 1337:80
+    depends_on:
+      - web
 
 volumes:
   postgres_data:
+  static_volume:
+  media_volume:
