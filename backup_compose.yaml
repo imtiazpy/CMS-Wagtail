@@ -1,18 +1,20 @@
 services:
   web:
-    build:
+    build: 
       context: ./app
-    image: cms-img-prod:latest
-    container_name: cms-container-prod
+      dockerfile: Dockerfile
+    command: /usr/src/app/scripts/entrypoint.sh
     volumes:
       - static_volume:/usr/src/app/staticfiles
       - media_volume:/usr/src/app/mediafiles
+    image: cms-img-prod:latest
+    container_name: cms-container-prod
+    expose:
+      - 8000
     env_file:
       - ./.env
     depends_on:
       - db
-    restart: always
-
   db:
     image: postgres:15
     container_name: cms-db-prod
@@ -20,20 +22,18 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env.db
-    restart: always
 
   nginx:
     build: ./nginx
+    volumes:
+    - static_volume:/usr/src/app/staticfiles/
+    - media_volume:/usr/src/app/mediafiles/
     image: nginx-img-prod:latest
     container_name: nginx-proxy-prod
-    volumes:
-      - static_volume:/usr/src/app/staticfiles
-      - media_volume:/usr/src/app/mediafiles
     ports:
-      - "1337:80"
+      - 1337:80
     depends_on:
       - web
-    restart: always
 
 volumes:
   postgres_data:

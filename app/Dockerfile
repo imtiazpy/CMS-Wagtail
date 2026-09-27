@@ -1,59 +1,65 @@
 # syntax=docker/dockerfile:1
 
-ARG PYTHON_TAG=3.11.4-slim-buster
+ARG PYTHON_TAG=3.11-slim-bookworm
+
+# -------------------------
+# 1️⃣ Builder stage
+# -------------------------
+FROM python:${PYTHON_TAG} as builder
+
+WORKDIR /install
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    libjpeg62-turbo-dev \
+    zlib1g-dev \
+    libwebp-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install pipenv and dependencies
+COPY Pipfile Pipfile.lock ./
+
+RUN pip install --upgrade pip && \
+    pip install pipenv==2024.0.1 && \
+    pipenv install --deploy --system
+
+# -------------------------
+# 2️⃣ Final stage (small image)
+# -------------------------
 FROM python:${PYTHON_TAG}
 
-RUN useradd wagtail
+RUN useradd -m wagtail
 
 WORKDIR /usr/src/app
-RUN mkdir /usr/src/app/staticfiles
 
-# create mediafiles directory if not already existing
-RUN mkdir /usr/src/app/mediafiles
+# Only runtime dependencies (NO build-essential here)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq-dev \
+    netcat-openbsd \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN chown -R wagtail:wagtail /usr/src/app
+# Copy installed Python packages from builder
+COPY --from=builder /usr/local/lib/python3.11 /usr/local/lib/python3.11
+COPY --from=builder /usr/local/bin /usr/local/bin
 
-# Port used by this container to serve HTTP.
-EXPOSE 8000
+# Create directories
+RUN mkdir -p /usr/src/app/staticfiles /usr/src/app/mediafiles && \
+    chown -R wagtail:wagtail /usr/src/app
+
+# Copy project
+COPY --chown=wagtail:wagtail . .
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PORT=8000
 
-# Install system packages required by Wagtail and Django.
-# this line (--mount=type=cache,target=/var/cache/apt) will enable building from the apt cache if the re-build is required
-RUN \
-    --mount=type=cache,target=/var/cache/apt \
-    apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
-    build-essential \
-    libpq-dev \
-    libmariadbclient-dev \
-    libjpeg62-turbo-dev \
-    zlib1g-dev \
-    libwebp-dev \
-    netcat \
- && rm -rf /var/lib/apt/lists/*
-
-# Install the project requirements.
-COPY --chown=wagtail:wagtail ./Pipfile ./Pipfile.lock /usr/src/app/
-
-RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -q 'pipenv==2024.0.1' && \
-    pipenv install --deploy --system
-
-# copy project
-COPY --chown=wagtail:wagtail ./ /usr/src/app
-
 USER wagtail
 
-# Ensure the entrypoint script has Unix line endings and is executable.
-RUN sed -i 's/\r$//g' /usr/src/app/scripts/entrypoint.sh
-RUN chmod +x /usr/src/app/scripts/entrypoint.sh
+# Fix entrypoint
+RUN sed -i 's/\r$//g' /usr/src/app/scripts/entrypoint.sh && \
+    chmod +x /usr/src/app/scripts/entrypoint.sh
 
-# uncomment bellow command if mediafiles and sqlite3 is already existing
-# RUN chmod +x /usr/src/app/mediafiles && \
-#     chown -R wagtail:wagtail /usr/src/app/mediafiles && \
-#     chown wagtail:wagtail /usr/src/app/db.sqlite3
+EXPOSE 8000
 
-# run entrypoint.sh
 ENTRYPOINT ["/usr/src/app/scripts/entrypoint.sh"]
